@@ -1,0 +1,74 @@
+.lE9gQ {
+    height: 100%;
+    width: 100%;
+    display: grid;
+    
+    grid-template-columns: repeat(auto-fit, minmax(200px, 300px));
+    grid-auto-rows: minmax(200px, 300px);
+    gap: 1rem;
+    justify-content: center;
+}
+
+.Ew14d {
+    height: 300px;
+    width: 300px;
+    position: relative;
+    text-align: center;
+    color: white !important;
+}
+
+@media screen and (max-width: 990px) {
+    .Ew14d{
+        height: 200px;
+        width: 200px;
+    }
+    .lE9gQ {
+        height: 100%;
+        width: 100%;
+        display: grid;
+        
+        grid-template-columns: repeat(auto-fit, minmax(100px, 200px));
+        grid-auto-rows: minmax(100px, 200px);
+        gap: 0.5rem;
+        justify-content: center;
+    }
+}
+@media screen and (max-width: 770px) {
+    .Ew14d{
+        height: 200px;
+        width: 200px;
+    }
+    .lE9gQ {
+        height: 100%;
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(100px, 200px));
+        grid-auto-rows: minmax(100px, 200px);
+        gap: 0.1rem;
+        justify-content: center;
+    }
+}
+
+
+.fJEX5 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+}
+
+.GpqB9 {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.50);
+    display: none;
+}
+
+.Ew14d:hover .GpqB9 {
+    display: block;
+}

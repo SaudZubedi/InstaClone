@@ -1,0 +1,65 @@
+*::before, *::after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgb(243, 243, 243);
+
+    font-family:'Segoe UI Semibold','Montserrat', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container {
+    width: 65%;
+}
+
+
+.content {
+    height: auto;
+    min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+    color: #252525;
+    /* color: #000000; */
+}
+
+.image {
+    height: 24px;
+    width: 24px;
+    border-radius: 25px;
+}
+
+.image-32 {
+    height: 32px;
+    width: 32px;
+    border-radius: 25px;
+}
+.image-big {
+    height: 48px;
+    width: 48px;
+    border-radius: 25px;
+}
+.image-large {
+    height: 150px;
+    width: 150px;
+    border-radius: 75px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+
+.s-post {
+	background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}

@@ -1,0 +1,28 @@
+{% extends 'home/user_profile.html' %}
+{% load static %}
+
+{% block title %}Saved{% endblock title %}
+
+{% block post-class %}{% endblock post-class %}
+{% block save-class %}active{% endblock save-class %}
+
+
+{% block main-content %}
+
+{% for saved_post in saved_posts %}
+    <a href="{% url 'home:post' saved_post.post.id %}">
+        <div class="post">
+            <img src="{{ saved_post.post.content.url }}">
+            <div class="CQLDr">
+                {% if saved_post.post.caption %}
+                    <p>{{saved_post.post.caption}}</p>
+                {% else %}
+                    <p>{{saved_post.post.date_published}}</p>
+                {% endif %}
+            </div>
+        </div>
+    </a>
+{% endfor %}
+
+{% endblock main-content %}
+

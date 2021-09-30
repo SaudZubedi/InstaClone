@@ -1,0 +1,29 @@
+{% extends 'home/main.html' %}
+{% load static %}
+
+{% block title %}
+    Explore
+{% endblock title %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/explore.css' %}">
+
+    <div class="lE9gQ">
+        {% for post in posts %}
+            <a href="{% url 'home:post' post.id %}">
+                <div class="Ew14d">
+                    <img class="Ew14d" src="{{post.content.url}}" alt="Content Not Found!">
+                    <div class="GpqB9">
+                        {% if post.caption %}
+                            <p class="fJEX5">{{post.caption}}</p>
+                        {% else %}
+                            <p class="fJEX5">{{post.date_published}}</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+
+{% endblock content %}

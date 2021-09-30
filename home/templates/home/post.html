@@ -1,0 +1,262 @@
+{% extends 'home/main.html' %} {% load static %} {% block title %} Post {% endblock title %} {% block content %}
+<link rel="stylesheet" href="{% static 'css/post.css' %}" />
+
+<head> </head>
+
+<div class="row">
+  <div class="post-div col-md-8">
+    <img src="{{post.content.url}}" alt="" />
+  </div>
+
+  <div class="right-side col-md-4">
+    <div class="username">
+      <div>
+        <a href="{% url 'home:user_profile' post.user.username %}">
+          <img class="image-32" src="{{post.user.imageURL}}" alt="" />
+        </a>
+      </div>
+
+      <div>
+        <a href="{% url 'home:user_profile' post.user.username %}">
+          {{post.user.username}}
+        </a>
+
+        <span>
+          <span
+            ><a href="{% url 'home:update_post' post.id %}"
+              ><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M14.06 9.02l.92.92L5.92 19H5v-.92l9.06-9.06M17.66 3c-.25 0-.51.1-.7.29l-1.83 1.83 3.75 3.75 1.83-1.83c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.2-.2-.45-.29-.71-.29zm-3.6 3.19L3 17.25V21h3.75L17.81 9.94l-3.75-3.75z"/></svg></a
+          ></span>
+          <span
+            ><a href="{% url 'home:delete_post' post.id %}"
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="24px"
+                viewBox="0 0 24 24"
+                width="24px"
+                fill="#000000"
+              >
+                <path d="M0 0h24v24H0V0z" fill="none" />
+                <path
+                  d="M16 9v10H8V9h8m-1.5-6h-5l-1 1H5v2h14V4h-3.5l-1-1zM18 7H6v12c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7z"
+                /></svg></a
+          ></span>
+        </span>
+      </div>
+    </div>
+
+    <div class="comments-section">
+      <span>
+        {% if post.caption %}
+        <div class="RioXt">
+          <img class="image-32" src="{{post.user.imageURL}}" alt="" />
+        </div>
+
+        <div class="LWSvU">
+          <p>{{post.user.username}}</p>
+          <pre>{{post.caption}}</pre>
+        </div>
+        {% endif %}
+      </span>
+
+      <ul>
+        {% for comment in comments %}
+
+        <li class="comment">
+          <div class="rLTfo">
+            <div class="IfcCU">
+              <div class="KybIO">
+                <img class="image-32" src="{{comment.user.imageURL}}" alt="" />
+              </div>
+              <a href="{% url 'home:user_profile' comment.user.username %}">
+                {{comment.user}}
+              </a>
+            </div>
+
+            {% if comment.user == request.user %}
+            <div>
+              <button
+                type="button"
+                class="s-post"
+                onclick="openMenu()"
+                style="cursor: pointer"
+              >
+                <svg
+                  height="24px"
+                  viewBox="0 0 24 24"
+                  width="24px"
+                  fill="#000000"
+                >
+                  <path d="M0 0h24v24H0V0z" fill="none" />
+                  <path
+                    d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
+                  />
+                </svg>
+              </button>
+
+              <div class="gHKEw" id="menu">
+                <div class="pZlEc">
+                  <button type="button" onclick="openMenu()" class="s-post">
+                    <svg
+                      width="24"
+                      height="24"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                    >
+                      <path
+                        d="M12 11.293l10.293-10.293.707.707-10.293 10.293 10.293 10.293-.707.707-10.293-10.293-10.293 10.293-.707-.707 10.293-10.293-10.293-10.293.707-.707 10.293 10.293z"
+                      />
+                    </svg>
+                  </button>
+                </div>
+
+                <div class="dVjKr">
+                  <ul class="text-center">
+                    <form action="" method="post">
+                      {% csrf_token %}
+                      <input type="hidden" name="1" value="{{comment.id}}" />
+                      <button
+                        type="submit"
+                        name="deleteComment"
+                        class="gzwDx s-post jwqPe"
+                      >
+                        <li>Delete</li>
+                      </button>
+                    </form>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            {% endif %}
+          </div>
+
+          <div class="text-center">
+            <pre>{{comment.comment}}</pre>
+          </div>
+
+          <hr />
+        </li>
+
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="jjdnf">
+      <div>
+        <span>
+          <form action="{% url 'home:post' post.id %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" name="likebtn" class="s-post">
+              {% if post_liked %}
+              <svg
+                aria-label="Unlike"
+                class="_8-yf5"
+                color="#ed4956"
+                fill="#ed4956"
+                height="24"
+                role="img"
+                viewBox="0 0 48 48"
+                width="24"
+              >
+                <path
+                  d="M34.6 3.1c-4.5 0-7.9 1.8-10.6 5.6-2.7-3.7-6.1-5.5-10.6-5.5C6 3.1 0 9.6 0 17.6c0 7.3 5.4 12 10.6 16.5.6.5 1.3 1.1 1.9 1.7l2.3 2c4.4 3.9 6.6 5.9 7.6 6.5.5.3 1.1.5 1.6.5s1.1-.2 1.6-.5c1-.6 2.8-2.2 7.8-6.8l2-1.8c.7-.6 1.3-1.2 2-1.7C42.7 29.6 48 25 48 17.6c0-8-6-14.5-13.4-14.5z"
+                ></path>
+              </svg>
+              {% else %}
+              <svg
+                color="#262626"
+                fill="#262626"
+                height="24"
+                role="img"
+                viewBox="0 0 48 48"
+                width="24"
+              >
+                <path
+                  d="M34.6 6.1c5.7 0 10.4 5.2 10.4 11.5 0 6.8-5.9 11-11.5 16S25 41.3 24 41.9c-1.1-.7-4.7-4-9.5-8.3-5.7-5-11.5-9.2-11.5-16C3 11.3 7.7 6.1 13.4 6.1c4.2 0 6.5 2 8.1 4.3 1.9 2.6 2.2 3.9 2.5 3.9.3 0 .6-1.3 2.5-3.9 1.6-2.3 3.9-4.3 8.1-4.3m0-3c-4.5 0-7.9 1.8-10.6 5.6-2.7-3.7-6.1-5.5-10.6-5.5C6 3.1 0 9.6 0 17.6c0 7.3 5.4 12 10.6 16.5.6.5 1.3 1.1 1.9 1.7l2.3 2c4.4 3.9 6.6 5.9 7.6 6.5.5.3 1.1.5 1.6.5.6 0 1.1-.2 1.6-.5 1-.6 2.8-2.2 7.8-6.8l2-1.8c.7-.6 1.3-1.2 2-1.7C42.7 29.6 48 25 48 17.6c0-8-6-14.5-13.4-14.5z"
+                ></path>
+              </svg>
+              {% endif %}
+            </button>
+          </form>
+        </span>
+
+        <span onclick="focusComment()">
+          <svg
+            aria-label="Comment"
+            class="_8-yf5"
+            color="#262626"
+            fill="#262626"
+            height="24"
+            role="img"
+            viewBox="0 0 48 48"
+            width="24"
+          >
+            <path
+              clip-rule="evenodd"
+              d="M47.5 46.1l-2.8-11c1.8-3.3 2.8-7.1 2.8-11.1C47.5 11 37 .5 24 .5S.5 11 .5 24 11 47.5 24 47.5c4 0 7.8-1 11.1-2.8l11 2.8c.8.2 1.6-.6 1.4-1.4zm-3-22.1c0 4-1 7-2.6 10-.2.4-.3.9-.2 1.4l2.1 8.4-8.3-2.1c-.5-.1-1-.1-1.4.2-1.8 1-5.2 2.6-10 2.6-11.4 0-20.6-9.2-20.6-20.5S12.7 3.5 24 3.5 44.5 12.7 44.5 24z"
+              fill-rule="evenodd"
+            ></path>
+          </svg>
+        </span>
+
+        <span>
+          <form action="{% url 'home:post' post.id %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" name="save" class="s-post">
+              {% if post_saved %}
+              <svg
+                aria-label="Remove"
+                class="_8-yf5"
+                color="#262626"
+                fill="#262626"
+                height="24"
+                role="img"
+                viewBox="0 0 48 48"
+                width="24"
+              >
+                <path
+                  d="M43.5 48c-.4 0-.8-.2-1.1-.4L24 28.9 5.6 47.6c-.4.4-1.1.6-1.6.3-.6-.2-1-.8-1-1.4v-45C3 .7 3.7 0 4.5 0h39c.8 0 1.5.7 1.5 1.5v45c0 .6-.4 1.2-.9 1.4-.2.1-.4.1-.6.1z"
+                ></path>
+              </svg>
+              {% else %}
+              <svg
+                aria-label="Save"
+                class="_8-yf5"
+                color="#262626"
+                fill="#262626"
+                height="24"
+                role="img"
+                viewBox="0 0 48 48"
+                width="24"
+              >
+                <path
+                  d="M43.5 48c-.4 0-.8-.2-1.1-.4L24 29 5.6 47.6c-.4.4-1.1.6-1.6.3-.6-.2-1-.8-1-1.4v-45C3 .7 3.7 0 4.5 0h39c.8 0 1.5.7 1.5 1.5v45c0 .6-.4 1.2-.9 1.4-.2.1-.4.1-.6.1zM24 26c.8 0 1.6.3 2.2.9l15.8 16V3H6v39.9l15.8-16c.6-.6 1.4-.9 2.2-.9z"
+                ></path>
+              </svg>
+              {% endif %}
+            </button>
+          </form>
+        </span>
+      </div>
+
+      <div>
+        <p>liked by {{likes}}</p>
+      </div>
+
+      <div>
+        {% if post.allow_comments %}
+        <form action="" method="POST">
+          {% csrf_token %} {% for field in form %}{{field}}{% endfor %}
+          <button type="submit" class="post-btn" name="addcomment">Post</button>
+        </form>
+        {% else %}
+        <p>Comments are turned off</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="{% static 'js/post.js' %}" defer></script>
+
+{% endblock content %}

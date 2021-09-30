@@ -1,0 +1,136 @@
+{% extends 'home/main.html' %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+Edit
+{% endblock title %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'css/settings.css' %}" />
+
+    <div class="igMPx">
+        <div class="YivwC">
+            <ul class="BZpRI">
+                <a href="{% url 'account:settings' %}" class="vAeGN">
+                    <li class="mscrB {% block eMhon %}a{% endblock eMhon %}">
+                        General
+                    </li>
+                </a>
+
+                <a href="{% url 'password_change' %}" class="vAeGN {% block iTOtp %}{% endblock iTOtp %}">
+                    <li class="mscrB">
+                        Change Password
+                    </li>
+                </a>
+
+                <a href="{% url 'account:logout' %}" class="vAeGN">
+                    <li class="mscrB">
+                        Logout
+                    </li>
+                </a>
+            </ul>
+        </div>
+
+        <div>
+            {% block main %}
+                <form action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
+                    <div class="VpWhO text-center" style="height: 80px">
+                        <div>
+                            <img style="height: 38px;width: 38px;border-radius: 50px;" src="{{request.user.imageURL}}" alt="">
+                        </div>
+                        <div>
+                            <h4 style="text-transform: capitalize;">
+                                {{request.user.username}}
+                            </h4>
+                            {{form.profile_pic}}
+                        </div>
+                    </div>
+
+                    <div class="VpWhO text-center" style="height: 60px">
+                        <div>
+                            Name
+                        </div>
+                        <div>
+                            {{form.name}}
+                            <p>Help people discover your account by using the name you're known by: either your full name,
+                                nickname, or business name.</p>
+                        </div>
+                    </div>
+
+                    <div class="VpWhO text-center">
+                        <div>
+                            Username
+                        </div>
+                        <div>
+                            {{form.username}}
+                        </div>
+                    </div>
+
+                    <div class="VpWhO text-center">
+                        <div>
+                            Website
+                        </div>
+                        <div>
+                            {{form.website}}
+                        </div>
+                    </div>
+
+                    <div class="VpWhO text-center" style="height: 120px">
+                        <div class="sadgdf">
+                            Bio
+                        </div>
+                        <div class="sadgdf">
+                            {{form.bio}}
+                            <br>
+                            <h6>Personal Information</h6>
+                            <p>Provide your personal information, even if the account is used for a business, a pet or something
+                                else. This won't be a part of your public profile.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="VpWhO text-center">
+                        <div>
+                            Email
+                        </div>
+                        <div>
+                            {{form.email}}
+                        </div>
+                    </div>
+
+                    <div class="VpWhO text-center">
+                        <div>
+                            Gender
+                        </div>
+                        <div>
+                            {{form.gender}}
+                        </div>
+                    </div>
+
+                    <br>
+                    <div class="ByjXo">
+                        <button type="submit">Save Changes</button>
+                    </div>
+                </form>
+            {% endblock main %}
+        </div>
+    </div>
+
+
+    <script>
+
+        document.getElementByclass('xmark').addEventListener('click', function () {
+            document.getElementsByClassName('messages').classList.add('h')
+            document.getElementsByClassName('xmark').classList.add('h')
+        })
+
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
+        }
+
+
+    </script>
+
+{% endblock content %}
