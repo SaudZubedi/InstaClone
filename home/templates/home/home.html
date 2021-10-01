@@ -53,7 +53,9 @@ Home
                         <div class="u7ewR">
                             <img src="{{post.user.imageURL}}" alt="">
                         </div>
-                        <p>{{post.user.username}}</p>
+                        <a href="{% url 'home:user_profile' post.user.username %}">
+                            <p>{{post.user.username}}</p>
+                        </a>
                     </div>
 
                 </div>

@@ -21,10 +21,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '3I7sr5gsK13!#!$FcRx5GjdhB!#!!!$#$CBUCsr5gsK13Ci#$3I!FcRoaxlNZoaCQXbIC5GjdhBCBUCi!7lNZCVgr?QXbIoh&CPV&O?RNBzMGttSJS#&2$782703$81?9857$869$89eLyYH?W567X433s$B57MGttSJS#&2$782703$oyYH?W567X433s$B57'
+
+import secrets
+SECRET_KEY = secrets.SECRET_KEY
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['saudinsta.herokuapp.com', '127.0.0.1']
 

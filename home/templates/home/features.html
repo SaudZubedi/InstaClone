@@ -28,9 +28,9 @@
                 <li>Login</li>
                 <li>Logout</li>
                 <li>Change Password</li>
-                <li><span style="text-decoration:line-through;">Reset Password</span> <span class="b">Currently unavailable</span></li>
+                <!-- <li><span style="text-decoration:line-through;">Reset Password</span> <span class="b">Currently unavailable</span></li> -->
                 <li>Update account properties</li>
-                <li>Search for other users</li>
+                <li>Search for users</li>
                 <li>Follow/Unfollow other users</li>
             </ol>
 
@@ -44,10 +44,16 @@
                 <ol>
                     <li>Delete comments</li>
                 </ol>
-                <li>Like/Unlike on posts</li>
+                <li>Like/Unlike posts</li>
                 <li>Save posts and view all the saved <a href="{% url 'home:saved_post' %}">here</a></li>
             </ol>
+
+            <br>
+            <li><span class="b">Database:</span> PostgeSQL | Hosted on <a href="https://aws.amazon.com/rds/" target="_blank" rel="noopener noreferrer">Amazon Relational Database Service</a></li>
+            <li><span class="b">Images from:</span> <a href="https://aws.amazon.com/s3/" target="_blank" rel="noopener noreferrer">Amazon S3</a></li>
+            <li><span class="b">Website hosted on:</span> <a href="https://www.heroku.com/" target="_blank" rel="noopener noreferrer">Heroku</a></li>
         </ol>
+
     </div>
 </body>
 </html>
