@@ -219,10 +219,9 @@ def post_view(request, pk):
             except:
                 SavedPost.objects.create(user=user, post=post)
         if 'deleteComment' in request.POST:
-            id = request.POST.get('1')
+            id = request.POST.get('comment_id')
             comment = Comment.objects.get(id=id)
             comment.delete()
-            print('Comment Deleted.')
 
 
     context = {
@@ -254,6 +253,19 @@ def saved_post_view(request):
     else:
         User.objects.all()
         search = ''
+
+    # user = get_object_or_404(User, username=request.user)
+
+    # user_posts = user.post_set.all()
+
+    # following = Follow.objects.filter(user=user).count
+    # followers = Follow.objects.filter(following=user).count
+    # try:
+    #     Follow.objects.get(user=request.user, following=user)
+    #     obj = True
+    # except:
+    #     obj = False
+
     return render(request,'home/saved.html', context)
 
 
