@@ -88,14 +88,21 @@ WSGI_APPLICATION = 'InstaClone.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'SaudInstaClone',
+#         'USER': os.environ.get('DB_USER'),
+#         'PASSWORD': os.environ.get('DB_PASSWORD'),
+#         'PORT': 5432,
+#         'HOST': 'database-1.ckr1ipvoo0ba.ap-south-1.rds.amazonaws.com',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'SaudInstaClone',
-        'USER': 'saud',
-        'PASSWORD': 'Iamacheater644',
-        'PORT': 5432,
-        'HOST': 'database-1.ckr1ipvoo0ba.ap-south-1.rds.amazonaws.com',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
@@ -174,7 +181,7 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 AWS_QUERYSTRING_AUTH    = False
 
 DEFAULT_FILE_STORAGE    = 'storages.backends.s3boto3.S3Boto3Storage'
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 AWS_ACCESS_KEY_ID       = os.environ.get('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY   = os.environ.get('AWS_SECRET_ACCESS_KEY')
