@@ -40,6 +40,7 @@ def user_profile_view(request, username):
 
     user_posts = user.post_set.all()
 
+    all_posts = Post.objects.filter(user=user).count
     following = Follow.objects.filter(user=user).count
     followers = Follow.objects.filter(following=user).count
     try:
@@ -59,6 +60,7 @@ def user_profile_view(request, username):
     context = {
         'obj': obj,
         'user': user,
+        'all_posts': all_posts,
         'following': following,
         'followers': followers,
         'user_posts': user_posts,
@@ -151,7 +153,6 @@ def delete_post_view(request, pk):
             search = ''
         return render(request, 'home/crud/delete.html', context)
 
-
 @authorizedUserCanView
 def explore_view(request):
     posts = Post.objects.all()
@@ -165,6 +166,7 @@ def explore_view(request):
         User.objects.all()
         search = ''
     return render(request, 'home/explore.html', context )
+
 
 def post_view(request, pk):
     post = get_object_or_404(Post, id=pk)
@@ -189,10 +191,8 @@ def post_view(request, pk):
     # So I can display the proper icon in the HTML document.
     try:
         SavedPost.objects.get(user=request.user, post=post)
-        print('User Have this post SAVED!')
         post_saved = True
     except:
-        print('User does not have this post SAVED')
         post_saved = False
 
     if request.method == 'POST':
@@ -218,6 +218,7 @@ def post_view(request, pk):
                 post.delete()
             except:
                 SavedPost.objects.create(user=user, post=post)
+        
         if 'deleteComment' in request.POST:
             id = request.POST.get('comment_id')
             comment = Comment.objects.get(id=id)
@@ -232,6 +233,7 @@ def post_view(request, pk):
         'post': post,
         'form': form,
     }
+
     search = request.GET.get('search')
     if search:
         results = User.objects.filter(username__icontains=search)
@@ -241,10 +243,20 @@ def post_view(request, pk):
         search = ''
     return render(request, 'home/post.html', context)
 
+
 @authorizedUserCanView
 def saved_post_view(request):
+    all_posts = Post.objects.filter(user=request.user).count
+    following = Follow.objects.filter(user=request.user).count
+    followers = Follow.objects.filter(following=request.user).count
+    
     saved_posts = SavedPost.objects.filter(user=request.user)
-    context = {'saved_posts': saved_posts}
+    context = {
+        'saved_posts': saved_posts,
+        'following': following,
+        'followers': followers,
+        'all_posts': all_posts,
+    }
     
     search = request.GET.get('search')
     if search:
@@ -253,18 +265,6 @@ def saved_post_view(request):
     else:
         User.objects.all()
         search = ''
-
-    # user = get_object_or_404(User, username=request.user)
-
-    # user_posts = user.post_set.all()
-
-    # following = Follow.objects.filter(user=user).count
-    # followers = Follow.objects.filter(following=user).count
-    # try:
-    #     Follow.objects.get(user=request.user, following=user)
-    #     obj = True
-    # except:
-    #     obj = False
 
     return render(request,'home/saved.html', context)
 

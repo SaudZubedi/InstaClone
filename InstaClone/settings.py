@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '3I7sr5gsK13!#!$FcRx5GjdhB!#!!!$#$CBUCsr5gsK13Ci#$3I!FcRoaxlNZoaCQXbIC5GjdhBCBUCi!7lNZCVgr?QXbIoh&CPV&O?RNBzMGttSJS#&2$782703$81?9857$869$89eLyYH?W567X433s$B57MGttSJS#&2$782703$oyYH?W567X433s$B57'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['saudinsta.herokuapp.com', '127.0.0.1']
 
@@ -99,16 +99,13 @@ DATABASES = {
     }
 }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
+
+# Connecting AWS PostgreSQL Database with Heroku.
 
 import dj_database_url
 db_from_env = dj_database_url.config(conn_max_age=600)
 DATABASES['default'].update(db_from_env)
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -186,4 +183,3 @@ STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 AWS_ACCESS_KEY_ID       = os.environ.get('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY   = os.environ.get('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
-
