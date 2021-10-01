@@ -35,11 +35,9 @@ Edit
 
         <div>
             {% block main %}
-                {% if form.errors %}                
-                    {% for error in form.errors %}
-                        <p style="color: red !important;">{{error}}</p>
-                    {% endfor %}
-                {% endif %}
+                <p style="color:red !important;">
+                    {{form.errors}}
+                </p>
                 <form action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
                     <div class="VpWhO text-center" style="height: 80px">
                         <div>
