@@ -139,10 +139,6 @@ ul, li {
     grid-row-gap: 16px;
 }
 
-.post {
-    border: 1px solid black;
-    position: relative;
-}
 
 .post > img {
     height: 280px;
@@ -169,6 +165,9 @@ ul, li {
     transform: translate(-50%, -50%);
 }
 
+.post {
+    position: relative;
+}
 .post:hover .CQLDr {display: block;}
 
 
